@@ -1,7 +1,10 @@
-require('dotenv').config({ path: '.env.production' })
-const mongoose = require('mongoose')
+import dotenv from 'dotenv'
+import mongoose from 'mongoose'
+import { Schema } from 'mongoose'
 
-const productSchema = new mongoose.Schema(
+dotenv.config({ path: '.env.production' })
+
+const productSchema = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
@@ -61,9 +64,9 @@ const products = [
   }
 ]
 
-async function seedProducts() {
+async function seedProducts(): Promise<void> {
   try {
-    await mongoose.connect(process.env.MONGO_URI)
+    await mongoose.connect(process.env.MONGO_URI as string)
     console.log('Connected to MongoDB...')
 
     await Product.deleteMany({})

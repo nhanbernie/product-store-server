@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
-import connectDB from '../../config/db'
-import Product from '../../models/product.model'
-import config from '../../config'
+import connectDB from '../../config/db.js'
+import Product from '../../models/product.model.js'
+import config from '../../config/index.js'
 
 dotenv.config({
   path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env'

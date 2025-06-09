@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import Product from '../../models/product.model'
-import logger from '../../utils/logger'
+import Product from '../../models/product.model.js'
+import logger from '../../utils/logger.js'
 
 // Get all products
 export const getProducts = async (req: Request, res: Response) => {

@@ -1,11 +1,11 @@
-import express, { Request, Response } from 'express'
-import cors from 'cors'
-import productRoutes from './routers/product.routes'
-import { errorHandler } from './middlewares/error.middleware'
-import logger from './utils/logger'
-import helmet from 'helmet'
-import rateLimit from 'express-rate-limit'
-import config from './config'
+import express, { Request, Response } from 'express';
+import cors from 'cors';
+import productRoutes from './routers/product.routes.js';
+import { errorHandler } from './middlewares/error.middleware.js';
+import logger from './utils/logger.js';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import config from './config/index.js';
 
 const app = express()
 
