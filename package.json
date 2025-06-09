@@ -1,0 +1,50 @@
+{
+  "name": "shop.server",
+  "version": "1.0.0",
+  "main": "eslint.config.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development nodemon --watch src --exec ts-node -r tsconfig-paths/register src/server.ts",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "start": "cross-env NODE_ENV=production node dist/server.js",
+    "start:prod": "npm run build && cross-env NODE_ENV=production node dist/server.js",
+    "start:prod:watch": "concurrently \"npm run build:watch\" \"nodemon --watch dist -e js --exec npm run start\"",
+    "seed": "node scripts/seed-products.js",
+    "seed:prod": "cross-env NODE_ENV=production node scripts/seed-products.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.13.14",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.1",
+    "winston": "^3.17.0"
+  }
+}
