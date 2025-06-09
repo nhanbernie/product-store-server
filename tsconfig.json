@@ -15,7 +15,7 @@
     "skipLibCheck": true,
     "noEmit": false,
     "types": ["node"],
-    "typeRoots": ["./node_modules/@types"],
+    "typeRoots": ["./node_modules/@openui5/ts-types-esm", "./node_modules/@types"],
     "resolveJsonModule": true,
     "paths": {
       "@config/*": ["config/*"],
