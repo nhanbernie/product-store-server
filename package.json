@@ -11,6 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development nodemon --watch src --exec tsx --tsconfig tsconfig.json src/server.ts",
     "build": "tsc && tsc-alias -p tsconfig.json",
+    "build:clean": "rm -rf dist && npm run build",
     "build:watch": "tsc --watch && tsc-alias -w",
     "start": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node dist/server.js",
     "start:prod": "npm run build && cross-env NODE_ENV=production node dist/server.js",
@@ -22,8 +23,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "5.0.2",
     "@types/cors": "2.8.19",
+    "@types/express": "5.0.3",
+    "@types/jsonwebtoken": "9.0.10",
     "@types/node": "22.15.30",
+    "@types/nodemailer": "6.4.17",
     "bcrypt": "5.1.1",
     "cloudinary": "^2.6.0",
     "cors": "^2.8.5",
@@ -37,18 +42,14 @@
     "mongoose": "8.16.4",
     "nodemailer": "7.0.5",
     "tsc-alias": "^1.8.16",
+    "typescript": "^5.8.2",
     "winston": "3.17.0"
   },
   "devDependencies": {
-    "@types/bcrypt": "5.0.2",
-    "@types/express": "5.0.3",
-    "@types/jsonwebtoken": "9.0.10",
-    "@types/nodemailer": "6.4.17",
     "concurrently": "^9.1.2",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "tsx": "^4.19.4",
-    "typescript": "^5.8.2"
+    "tsx": "^4.19.4"
   }
 }
