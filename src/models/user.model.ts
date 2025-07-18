@@ -2,15 +2,24 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 
 interface IUser extends mongoose.Document {
-  email: string;
-  password: string;
-  name: string;
-  role: string;
-  isVerified: boolean;
-  refreshToken?: string;
-  resetPasswordToken?: string;
-  resetPasswordExpires?: Date;
-  comparePassword(candidatePassword: string): Promise<boolean>;
+  email: string
+  password: string
+  name: string
+  role: string
+  isVerified: boolean
+  phone?: string
+  avatar?: string
+  address?: {
+    street?: string
+    city?: string
+    district?: string
+    ward?: string
+    postalCode?: string
+  }
+  refreshToken?: string
+  resetPasswordToken?: string
+  resetPasswordExpires?: Date
+  comparePassword(candidatePassword: string): Promise<boolean>
 }
 
 const userSchema = new mongoose.Schema(
@@ -39,6 +48,36 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
+    phone: {
+      type: String,
+      trim: true
+    },
+    avatar: {
+      type: String,
+      trim: true
+    },
+    address: {
+      street: {
+        type: String,
+        trim: true
+      },
+      city: {
+        type: String,
+        trim: true
+      },
+      district: {
+        type: String,
+        trim: true
+      },
+      ward: {
+        type: String,
+        trim: true
+      },
+      postalCode: {
+        type: String,
+        trim: true
+      }
+    },
     refreshToken: {
       type: String
     },
@@ -60,9 +99,9 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
-userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
-  return await bcrypt.compare(candidatePassword, this.password);
-};
+userSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
+  return await bcrypt.compare(candidatePassword, this.password)
+}
 
-const User = mongoose.model<IUser>('User', userSchema);
-export default User;
+const User = mongoose.model<IUser>('User', userSchema)
+export default User

@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
 import {
   getProducts,
   getProductById,
@@ -6,32 +6,25 @@ import {
   updateProduct,
   deleteProduct
 } from '../modules/product/product.controller.js'
+import { authenticateToken, requireAdmin } from '../middlewares/auth.middleware.js'
 
 const router = Router()
 
-// GET /api/products Get all products
-router.get('/', async (req: Request, res: Response) => {
-  await getProducts(req, res)
-})
+// Public routes - không cần authentication
+// GET /api/products - Xem tất cả sản phẩm (public)
+router.get('/', getProducts)
 
-// GET /api/products/:id - Get single product
-router.get('/:id', async (req: Request, res: Response) => {
-  await getProductById(req, res)
-})
+// GET /api/products/:id - Xem chi tiết sản phẩm (public)
+router.get('/:id', getProductById)
 
-// POST /api/products - Create new product
-router.post('/', async (req: Request, res: Response) => {
-  await createProduct(req, res)
-})
+// Admin-only routes - cần authentication và admin role
+// POST /api/products - Tạo sản phẩm mới (chỉ admin)
+router.post('/', authenticateToken, requireAdmin, createProduct)
 
-// PUT /api/products/:id - Update product
-router.put('/:id', async (req: Request, res: Response) => {
-  await updateProduct(req, res)
-})
+// PUT /api/products/:id - Cập nhật sản phẩm (chỉ admin)
+router.put('/:id', authenticateToken, requireAdmin, updateProduct)
 
-// DELETE /api/products/:id - Delete product
-router.delete('/:id', async (req: Request, res: Response) => {
-  await deleteProduct(req, res)
-})
+// DELETE /api/products/:id - Xóa sản phẩm (chỉ admin)
+router.delete('/:id', authenticateToken, requireAdmin, deleteProduct)
 
 export default router
